@@ -1,0 +1,54 @@
+Coursera Data Products Course Project Application
+========================================================
+author: d2ski
+date: `r date()`
+
+### Developing Shiny application for predicting default status
+Based on logistic regression discussed in "Introduction to Statistical Learning" by G.James, D.Witten, T.Hastie, R.Tibshirani
+
+Summary
+========================================================
+
+App link: https://d2ski.shinyapps.io/shapp/
+
+The app calculates default probability of a person given his/her:
+- income
+- credit card balance
+- student/not student status  
+  
+The simple prediction algorithm is logistic regression model based on simulated dataset provided in ISLR R-package.
+
+Data
+========================================================
+
+The source of the data is ISLR R-package from "Introduction to Statistical Learning" by G.James, D.Witten, T.Hastie, R.Tibshirani.
+
+```{r}
+require(ISLR)
+data(Default)
+str(Default)
+```
+
+The algorithm
+========================================================
+Logistic regression model was used.
+
+```{r}
+glm.fit <- glm(default~balance+income+student, data=Default, family=binomial)
+glm.fit$formula
+glm.fit$coef
+```
+
+Probability of default
+========================================================
+Probability is calculated using the formula:
+
+$\hat{p}(X)=\frac{e^{\hat{\beta_0}X_0 + \hat{\beta_1}X_1 + \hat{\beta_2}X_2 + \hat{\beta_3}X_3}}{1+e^{\hat{\beta_0}X_0 + \hat{\beta_1}X_1 + \hat{\beta_2}X_2 + \hat{\beta_3}X_3}}$
+
+For example, for a student with credit card balance 1,500 USD and income 40,000 USD probability of default $\hat{p}(X)=0.058$.
+
+Please, note that the data was simulated, so the algorithm is not related to real life and was developed and can be used for education purposes only.
+
+For more information, please, check chapter 4.3 of "Introduction to Statistical Learning" by G.James, D.Witten, T.Hastie, R.Tibshirani.
+
+App link: https://d2ski.shinyapps.io/shapp/
